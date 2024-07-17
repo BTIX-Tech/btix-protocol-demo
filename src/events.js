@@ -1,11 +1,11 @@
-const { apiSympla, apiProtocol } = require('./api');
+const { apiSympla, apiProtocol } = require("./api");
 
 /**
  * Function to get events from the Sympla API.
  * @returns {Promise<Array>} - The list of events.
  */
 const getEvents = async () => {
-  const { data } = await apiSympla('events');
+  const { data } = await apiSympla("events");
   return data;
 };
 
@@ -24,7 +24,7 @@ const getTickets = async (eventId) => {
  * @param {Array} events - The list of events from Sympla.
  */
 const checkNewEvents = async (events) => {
-  const { results: eventsProtocol } = await apiProtocol('public/events');
+  const { results: eventsProtocol } = await apiProtocol("public/events");
   const newEvents = events.filter((event) => {
     return !eventsProtocol.find(
       (eventProtocol) => eventProtocol.referenceId === event.id
@@ -32,14 +32,14 @@ const checkNewEvents = async (events) => {
   });
   const newEventsPromises = newEvents.map(({ name, id, detail, image }) =>
     apiProtocol(
-      'events',
-      'post',
+      "events",
+      "post",
       JSON.stringify({
         name,
         referenceId: id,
         data: {
           minimumPrice: 4.5,
-          symbol: 'DEMO',
+          symbol: "DEMO",
           royaltieFee: 10,
         },
         metadata: {

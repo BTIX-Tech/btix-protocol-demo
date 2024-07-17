@@ -1,11 +1,11 @@
-const { apiProtocol } = require('./api');
+const { apiProtocol } = require("./api");
 
 /**
  * Function to check for new tickets and add them to the Protocol API.
  * @param {Array} tickets - The list of tickets from Sympla.
  */
 const checkNewTickets = async (tickets) => {
-  const { results: eventsProtocol } = await apiProtocol('public/events');
+  const { results: eventsProtocol } = await apiProtocol("public/events");
   const ticketsPromises = eventsProtocol.map((event) =>
     apiProtocol(`events/${event.id}/tickets`)
   );
@@ -21,7 +21,7 @@ const checkNewTickets = async (tickets) => {
   const newTicketsPromises = newTickets.map(({ id, buyer_email, protocolId }) =>
     apiProtocol(
       `events/${protocolId}/tickets`,
-      'post',
+      "post",
       JSON.stringify({
         referenceId: id,
         owner: buyer_email,
@@ -29,19 +29,19 @@ const checkNewTickets = async (tickets) => {
           price: 10,
         },
         metadata: {
-          name: 'Não tem mano',
-          description: 'Faz um pix pra mim?',
+          name: "Não tem mano",
+          description: "Faz um pix pra mim?",
           image:
-            'https://btix.app/wp-content/uploads/2024/01/capa-video-home.jpg',
-          external_link: 'https://www.sympla.com.br/',
+            "https://btix.app/wp-content/uploads/2024/01/capa-video-home.jpg",
+          external_link: "https://www.sympla.com.br/",
           traits: [
             {
-              trait_type: 'Nome',
-              value: 'VITRIGO',
+              trait_type: "Nome",
+              value: "VITRIGO",
             },
             {
-              trait_type: 'Email',
-              value: 'VISOJA',
+              trait_type: "Email",
+              value: "VISOJA",
             },
           ],
         },
