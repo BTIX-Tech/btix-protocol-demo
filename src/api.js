@@ -18,11 +18,12 @@ const apiSympla = async (path, version = 4) => {
       }
     );
     if (!response.ok) {
+      console.error("🚀 ~ Sympla API Error:", response)
       throw new Error(`Sympla API Error: ${response.statusText}`);
     }
     return await response.json();
   } catch (error) {
-    console.error(`Error in apiSympla: ${error.message}`);
+    console.error(`Error in apiSympla: ${error}`);
     throw error;
   }
 };
@@ -50,11 +51,12 @@ const apiProtocol = async (path, method = "get", body) => {
       }
     );
     if (!response.ok) {
+      console.error("🚀 ~ Protocol API Error:", response)
       throw new Error(`Protocol API Error: ${response.statusText}`);
     }
     return await response.json();
   } catch (error) {
-    console.error(`Error in apiProtocol: ${error.message}`);
+    console.error(`Error in apiProtocol: ${error}`);
     throw error;
   }
 };

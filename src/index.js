@@ -1,4 +1,4 @@
-const { getEvents, checkNewEvents, getTickets } = require("./events");
+const { getEventsSympla, checkNewEvents, getTickets, getEventsProtocol } = require("./events");
 const { checkNewTickets } = require("./tickets");
 
 /**
@@ -26,12 +26,8 @@ displayHeader();
  */
 const run = async () => {
   try {
-    const events = await getEvents();
-    await checkNewEvents(events);
-
-    const ticketsPromises = events.map((event) => getTickets(event.id));
-    const tickets = await Promise.all(ticketsPromises);
-    await checkNewTickets(tickets.flat());
+    await checkNewEvents();
+    await checkNewTickets();
 
     console.log("Process completed successfully.");
   } catch (error) {
