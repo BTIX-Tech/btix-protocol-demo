@@ -1,6 +1,10 @@
 const { getEvents, checkNewEvents, getTickets } = require('./events');
 const { checkNewTickets } = require('./tickets');
 
+/**
+ * Main function to run the synchronization process.
+ * Fetches events and tickets from Sympla and synchronizes them with the Protocol API.
+ */
 const run = async () => {
   try {
     const events = await getEvents();

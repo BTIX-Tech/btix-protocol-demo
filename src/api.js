@@ -1,7 +1,12 @@
 require('dotenv').config();
-
 const fetch = require('node-fetch');
 
+/**
+ * Function to call the Sympla API.
+ * @param {string} path - The API endpoint to call.
+ * @param {number} version - The API version to use (default is 4).
+ * @returns {Promise<Object>} - The response from the API.
+ */
 const apiSympla = async (path, version = 4) => {
   try {
     const response = await fetch(
@@ -22,6 +27,13 @@ const apiSympla = async (path, version = 4) => {
   }
 };
 
+/**
+ * Function to call the Protocol API.
+ * @param {string} path - The API endpoint to call.
+ * @param {string} method - The HTTP method to use (default is 'get').
+ * @param {Object} body - The request body for POST requests.
+ * @returns {Promise<Object>} - The response from the API.
+ */
 const apiProtocol = async (path, method = 'get', body) => {
   try {
     const response = await fetch(`${process.env.PROTOCOL_API_URL}/v1/${path}`, {

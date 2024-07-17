@@ -1,15 +1,28 @@
 const { apiSympla, apiProtocol } = require('./api');
 
+/**
+ * Function to get events from the Sympla API.
+ * @returns {Promise<Array>} - The list of events.
+ */
 const getEvents = async () => {
   const { data } = await apiSympla('events');
   return data;
 };
 
+/**
+ * Function to get tickets for a specific event from the Sympla API.
+ * @param {number} eventId - The ID of the event.
+ * @returns {Promise<Array>} - The list of tickets for the event.
+ */
 const getTickets = async (eventId) => {
   const { data } = await apiSympla(`events/${eventId}/orders`, 3);
   return data;
 };
 
+/**
+ * Function to check for new events and add them to the Protocol API.
+ * @param {Array} events - The list of events from Sympla.
+ */
 const checkNewEvents = async (events) => {
   const { results: eventsProtocol } = await apiProtocol('public/events');
   const newEvents = events.filter((event) => {

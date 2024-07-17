@@ -1,5 +1,9 @@
 const { apiProtocol } = require('./api');
 
+/**
+ * Function to check for new tickets and add them to the Protocol API.
+ * @param {Array} tickets - The list of tickets from Sympla.
+ */
 const checkNewTickets = async (tickets) => {
   const { results: eventsProtocol } = await apiProtocol('public/events');
   const ticketsPromises = eventsProtocol.map((event) =>
