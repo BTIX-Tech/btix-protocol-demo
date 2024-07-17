@@ -1,0 +1,8 @@
+# Ignore the node_modules directory, which contains all npm packages
+node_modules/
+
+# Ignore environment variable files
+.env
+
+# Ignore the automatically generated package-lock.json file
+package-lock.json
