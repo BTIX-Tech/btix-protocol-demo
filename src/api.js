@@ -1,5 +1,4 @@
-require('dotenv').config();
-const fetch = require('node-fetch');
+require("dotenv").config();
 
 /**
  * Function to call the Sympla API.
@@ -9,7 +8,8 @@ const fetch = require('node-fetch');
  */
 const apiSympla = async (path, version = 4) => {
   try {
-    const response = await fetch(
+    const fetch = await import("node-fetch");
+    const response = await fetch.default(
       `${process.env.SYMPLA_API_URL}/v${version}/${path}`,
       {
         headers: {
@@ -34,17 +34,21 @@ const apiSympla = async (path, version = 4) => {
  * @param {Object} body - The request body for POST requests.
  * @returns {Promise<Object>} - The response from the API.
  */
-const apiProtocol = async (path, method = 'get', body) => {
+const apiProtocol = async (path, method = "get", body) => {
   try {
-    const response = await fetch(`${process.env.PROTOCOL_API_URL}/v1/${path}`, {
-      method,
-      body,
-      headers: {
-        accept: 'application/json',
-        'x-api-key': process.env.PROTOCOL_API_KEY,
-        'Content-Type': 'application/json'
-      },
-    });
+    const fetch = await import("node-fetch");
+    const response = await fetch.default(
+      `${process.env.PROTOCOL_API_URL}/v1/${path}`,
+      {
+        method,
+        body,
+        headers: {
+          accept: "application/json",
+          "x-api-key": process.env.PROTOCOL_API_KEY,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error(`Protocol API Error: ${response.statusText}`);
     }
