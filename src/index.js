@@ -26,7 +26,7 @@ displayHeader();
  */
 const run = async () => {
   try {
-    await checkNewEvents();
+    // await checkNewEvents();
     await checkNewTickets();
 
     console.log("Process completed successfully.");

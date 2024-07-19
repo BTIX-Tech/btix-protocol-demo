@@ -39,53 +39,38 @@ const checkNewEvents = async () => {
           String(eventProtocol.referenceId) === String(event.id)
       )
   );
+  if (newEvents.length === 0) return;
 
   // Step 3
-  if (newEvents.length === 0) return;
-  await apiProtocol(
-    "events",
-    "post",
-    JSON.stringify({
-      name: newEvents[0].name,
-      referenceId: newEvents[0].id,
-      data: {
-        minimumPrice: 4.5,
-        symbol: "DEMO",
-        royaltieFee: 10,
-      },
-      metadata: {
-        name: newEvents[0].name,
-        description: newEvents[0].detail,
-        image: newEvents[0].image,
-        banner_image: newEvents[0].image,
-        featured_image: newEvents[0].image,
-      },
-    })
-  );
+  for (let event of newEvents) {
+    const { name, id, detail, image } = event;
 
-  // const newEventsPromises = newEvents.map(({ name, id, detail, image }) =>
-  //   apiProtocol(
-  //     "events",
-  //     "post",
-  //     JSON.stringify({
-  //       name,
-  //       referenceId: id,
-  //       data: {
-  //         minimumPrice: 4.5,
-  //         symbol: "DEMO",
-  //         royaltieFee: 10,
-  //       },
-  //       metadata: {
-  //         name,
-  //         description: detail,
-  //         image,
-  //         banner_image: image,
-  //         featured_image: image,
-  //       },
-  //     })
-  //   )
-  // );
-  // await Promise.all(newEventsPromises);
+    console.log("Adding new event to Protocol API:", event.name);
+
+    const eventCreated = await apiProtocol(
+      "events",
+      "post",
+      JSON.stringify({
+        name,
+        referenceId: id,
+        data: {
+          minimumPrice: 4.5,
+          symbol: "DEMO",
+          royaltieFee: 10,
+        },
+        metadata: {
+          name,
+          description: detail,
+          image,
+          banner_image: image,
+          featured_image: image,
+        },
+      })
+    );
+
+    console.log("Event added to Protocol API:", eventCreated.name);
+    console.log("");
+  }
 };
 
 module.exports = { getEventsSympla, checkNewEvents, getEventsProtocol };
