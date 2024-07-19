@@ -1,11 +1,16 @@
-const { getEventsSympla, checkNewEvents, getTickets, getEventsProtocol } = require("./events");
+const {
+  getEventsSympla,
+  checkNewEvents,
+  getTickets,
+  getEventsProtocol,
+} = require("./events");
 const { checkNewTickets } = require("./tickets");
 
 /**
  * Display header information for the BTIX Protocol Demo.
  */
 const displayHeader = () => {
-  console.clear()
+  console.clear();
   console.log("=======================================");
   console.log("");
   console.log(" BTIX PROTOCOL DEMO");
@@ -26,7 +31,12 @@ displayHeader();
  */
 const run = async () => {
   try {
-    // await checkNewEvents();
+    console.log("Checking for new events...");
+    console.log("")
+    await checkNewEvents();
+    
+    console.log("Checking for new tickets...");
+    console.log("")
     await checkNewTickets();
 
     console.log("Process completed successfully.");
