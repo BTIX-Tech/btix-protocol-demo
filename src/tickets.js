@@ -50,9 +50,7 @@ const checkNewTickets = async () => {
   const ticketsProtocolPromises = eventsProtocolCompleted.map((e) =>
     getTicketsProtocol(e.id)
   );
-  const ticketsProtocol = (await Promise.all(
-    ticketsProtocolPromises
-  )).flat()
+  const ticketsProtocol = (await Promise.all(ticketsProtocolPromises)).flat();
 
   // Step 3
   const newTickets = ticketsSympla.filter((ticketSympla) => {
@@ -98,12 +96,8 @@ const checkNewTickets = async () => {
           external_link: "https://www.sympla.com.br/",
           traits: [
             {
-              trait_type: "Nome",
-              value: "VITRIGO",
-            },
-            {
-              trait_type: "Email",
-              value: "VISOJA",
+              trait_type: "Category",
+              value: ticket_name || "Ticket name",
             },
           ],
         },
